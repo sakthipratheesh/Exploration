@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="8ba97b64-94e6-4b50-84d0-cb0fe7ced4e8" activeEnvironment="Default" name="GraphQL Demo Project" resourceRoot="${projectDir}" soapui-version="5.7.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  <con:testSuite id="0f153644-1ab5-47b6-8b78-9b1b4706f9bd" name="TestSuite (GraphQL)">
+    <con:description>TestSuite generated for REST Service [https://restcountries.eu]</con:description>
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase id="3e723282-d038-4c1d-bf32-f5964bf88c7a" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase1" searchProperties="true">
+      <con:description>TestCase generated for REST Resource [All] located at [/rest/v2/all]</con:description>
+      <con:settings/>
+      <con:testStep type="graphqltestrequest" name="GraphQL Request" id="0b5850b4-f127-4baf-b02f-751526738294">
+        <con:settings/>
+        <con:config xsi:type="con:GraphQLTestRequest" id="7ac47851-50dc-4a02-bd5d-cc97ff06d62b" name="GraphQL Request" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>https://countries.trevorblades.com/</con:endpoint>
+          <con:request>{"query":"query {\n  countries {\n    name\n  }\n}","operationName":null,"variables":null}</con:request>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase id="b5a192cd-706f-4b6d-acef-a67fb0300afb" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase (not wrking)" searchProperties="true" disabled="true">
+      <con:description>TestCase generated for REST Resource [All] located at [/rest/v2/all]</con:description>
+      <con:settings/>
+      <con:testStep type="graphqltestrequest" name="GraphQL Request" id="d6982e1b-4139-4039-929a-25180db3f07c">
+        <con:settings/>
+        <con:config xsi:type="con:GraphQLTestRequest" id="7ac47851-50dc-4a02-bd5d-cc97ff06d62b" name="GraphQL Request" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>https://example.com:8888/graphql</con:endpoint>
+          <con:request>{"query":"query getCustomer($myId: String) {\n  customer (id: $myId) {\n    id\n    name\n    email\n  }\n}","operationName":null,"variables":{"myId":"1"}}</con:request>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase id="2f17b99d-e7b0-4047-8982-fe9d2a1553d8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase2" searchProperties="true">
+      <con:description>TestCase generated for REST Resource [All] located at [/rest/v2/all]</con:description>
+      <con:settings/>
+      <con:testStep type="graphqltestrequest" name="GraphQL Request" id="1aadea78-d8f8-456f-bf0a-d2aa3783fa74">
+        <con:settings/>
+        <con:config xsi:type="con:GraphQLTestRequest" id="7ac47851-50dc-4a02-bd5d-cc97ff06d62b" name="GraphQL Request" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>https://countries.trevorblades.com/</con:endpoint>
+          <con:request>{"query":"query GetCountry {\n  country(code: \"IN\") {\n    name\n    native\n    capital\n    emoji\n    currency\n    languages {\n      code\n      name\n    }\n  }\n}","operationName":null,"variables":null}</con:request>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:properties/>
+    <con:tearDownScript><![CDATA[import java.util.Date
+import java.text.SimpleDateFormat
+import com.eviware.soapui.support.XmlHolder
+SimpleDateFormat ft = new SimpleDateFormat ("dd-MM-yyyy_HHmmss");
+SimpleDateFormat ftt = new SimpleDateFormat ("dd-MM-yyyy hh:mm:ss a");
+String ProjectPath = context.expand('${projectDir}') + "\\" + testSuite.project.name + "\\"
+String HTML_Starting = '<html><head><style>.tooltip{position:absolute;margin:5px;width:200px;height:50px;border:1px solid black;display:none;background-color: #FFFFFF}</style><script>function showTool(objectID){ var theElementStyle = document.getElementById(objectID);theElementStyle.style.display = "block";}function hideTool(objectID){ var theElementStyle = document.getElementById(objectID);theElementStyle.style.display = "none";}</script><script type="text/javascript" src="https://www.google.com/jsapi"></script>'               
+String HTML_Ending   = '</body></html>'
+String HTML_Body     = ''
+String HTML_Final    = '';
+int OPass = 0;
+int OFail = 0;
+int TotalCases = 0;
+ArrayList<String> TC = new ArrayList<String>();
+HashMap<String,String> BODY = new HashMap<String,String>()
+
+log.info 'Start '+ runner.results
+
+runner.results.each
+{    testCaseResult = it
+                testCaseName = testCaseResult.getTestCase().name
+                TC.add(testCaseName)
+}
+
+Collections.sort(TC)
+int TestcaseNO = 1;
+runner.results.each
+
+{   
+
+  try{
+                testCaseResult = it
+                testCaseName = testCaseResult.getTestCase().name
+     String testCaseName=testCaseName
+     String testCaseDesc=testCaseResult.getTestCase().getDescription()
+     String testCaseID = testCaseName
+     if(testCaseID.contains('BUG'))testCaseID=testCaseID.split('\\[')[0]
+     if(testCaseDesc==null||testCaseDesc=='')testCaseDesc=testCaseName
+     //if(testCaseName.equalsIgnoreCase(testCaseDesc))testCaseID = 'TestCase '+TestcaseNO
+     //TestcaseNO+=1;
+	 
+     log.info 'Test case result '+testCaseResult.getStatus()
+                if(testCaseResult.getStatus().toString().contains("FINISHED")){HTML_Body+='<TABLE align="center" ID="One" class= "class_name" bgcolor="#65C400" border width ="80%"  cellspacing = 0 cellpadding = 2  style = "border-left:solid 2px White;"><TR><TD width = "10%" align="center" ><font color="white">'+testCaseID+'</font></TD><TD width = "50%" onClick="showDiv(\'target'+testCaseName+'\');return false;" ><font color="white">'+testCaseDesc+'</font></td></TR></TABLE><div id="target'+testCaseName+'" style="display:none">';OPass+=1;}
+                else if(testCaseResult.getStatus().toString().contains("PASS")){HTML_Body+='<TABLE align="center" ID="One" class= "class_name" bgcolor="#65C400" border width ="80%"  cellspacing = 0 cellpadding = 2  style = "border-left:solid 2px White;"><TR><TD width = "10%" align="center" ><font color="white">'+testCaseID+'</font></TD><TD width = "50%" onClick="showDiv(\'target'+testCaseName+'\');return false;" ><font color="white">'+testCaseDesc+'</font></td></TR></TABLE><div id="target'+testCaseName+'" style="display:none">';OPass+=1;}
+                else{
+                                                String summarysize='50';
+                                                String BUGS='';
+                                                if(testCaseResult.getTestCase().name.toString().contains('BUG'))
+                                                {
+                                                                BUGS='<table>';
+                                                                summarysize='40';
+                                                                String Buglist = testCaseResult.getTestCase().name.toString().split('\\[')[1].split('\\]')[0];
+                                                                ArrayList bugsl = new ArrayList();
+                                                                if(Buglist.contains(','))bugsl=Buglist.split(',')
+                                                                for(String bl : bugsl)
+                                                                BUGS+='<tr><td><a target="_blank" href="https://ariasystems.atlassian.net/browse/'+bl+'">'+bl+'</a></td></tr>';
+                                                                BUGS+='</table>';
+                                                                BUGS='<TD width = "10%" bgcolor=white align="center" onmouseover="showTool(\'target'+testCaseName+'BUG(s)\');return false;" onmouseout="hideTool(\'target'+testCaseName+'BUG(s)\');return false;"><font color="red"><b>BUG(s)</b></font><div id="target'+testCaseName+'BUG(s)" style="display:none" class = "tooltip">'+BUGS+'</div></TD>';
+                                                }
+                                                HTML_Body+='<TABLE align="center" ID="One" class= "class_name" bgcolor="#C20000" border width ="80%"  cellspacing = 0 cellpadding = 2  style = "border-left:solid 2px White;"><TR><TD width = "10%" align="center" ><font color="white">'+testCaseID+'</font></TD><TD width = "'+summarysize+'%" onClick="showDiv(\'target'+testCaseName+'\');return false;" ><font color="white">'+testCaseDesc+'</font></td>'+BUGS+'</tr></TABLE><div id="target'+testCaseName+'" style="display:none">';
+                                                OFail+=1;
+                     }
+
+                int step=0;
+                testCaseResult.getTestCase().testStepList.each
+                {                             
+                                String type=it.config.type
+                                String StepName=it.name
+          String req = '';
+          String response    
+                                if(type=="request"  || type=="httprequest" || type=="jdbc")
+
+          {    step+=1;
+                if(type=="request")
+               {
+               req  = it.getTestRequest().response.getRequestContent() ;
+               response=it.getProperty('Response').getValue()
+               }
+               else if (type=="httprequest")
+               {
+                     String propFinal=''
+                     def propToRemove = ['RawRequest','ResponseAsXml','Endpoint','Domain','Password','Response','Username']
+                     for (String p in it.getPropertyNames())
+                     {
+                                if(!propToRemove.contains(p) && it.getPropertyValue(p)!='')
+                                                propFinal=propFinal+p +": "+it.getPropertyValue(p)+"\n"
+                     }
+                     req = propFinal.replaceAll(",","\n")
+                     response=it.getProperty('Response').getValue()
+               }
+               else if (type=="jdbc")
+               {
+               req = it.getQuery()
+                response = it.getProperty('ResponseAsXml').getValue().toString()
+               }
+               else if (type=="jdbc")
+               {
+               req = it.getQuery()
+               def propToRemove = ['RawRequest','ResponseAsXml','Endpoint','Domain','Password']
+                    response = it.getProperty('ResponseAsXml').getValue().toString()
+               }
+
+               String StepResult = 'Passed'
+               log.info  'Step results '+it.assertionStatus.toString()
+               if(it.assertionStatus.toString().contains("UNKNOWN")){
+              StepResult = '<td width="25%" align="center"><font color="orange"><b>No Assertion</b></font></TD>'
+               } else if(it.assertionStatus.toString().contains("VALID"))
+               StepResult = '<td width="25%" align="center"><font color="green"><b>Passed</b></font></TD>'
+                else if(it.assertionStatus.toString().contains("PASS"))
+               StepResult = '<td width="25%" align="center"><font color="green"><b>Passed</b></font></TD>'
+               else
+               StepResult = '<td width="25%" align="center"><font color="red"><b>Failed</b></font></TD>'
+               HTML_Body+='<TABLE align="center" ID="One" class= "class_name" bgcolor="#E5E4E2" border width ="80%"  cellspacing = 0 cellpadding = 2  style = "border-left:solid 2px White;"><TR><TD width = "11%" >Step '+step+'</TD><TD width = "40%"><a href="#" onClick="showDiv(\'target'+testCaseName+'_'+step+'\');return false;">'+StepName+'</a></td><td><a href="#" onClick="showDiv(\'target'+testCaseName+'_'+step+'ReqRes\');return false;" size ="1">Request/Response</a>&emsp;&emsp;&emsp;' + it.testRequest.response.timeTaken+'ms</TD>'+StepResult
+                                                HTML_Body+='</TR></TABLE>'
+
+                HTML_Body+='<div id="target'+testCaseName+'_'+step+'\" style=\"display:none\"><TABLE align="center" ID="One" class= "class_name" bgcolor="#FFFAF0" border width ="80%"  cellspacing = 0 cellpadding = 2  style = "border-left:solid 2px White;">'
+                it.getAssertionList().each
+                                {
+                                myAssertion->
+                                String aname="$myAssertion.label"
+                                                                String astatus="$myAssertion.status"
+                                                                String amsg=""
+                                                                log.info 'Assertion Result '+ astatus
+                                                                if (astatus.equals("VALID"))
+                    {
+
+                      ares='<font color="green">Passed</font>'
+                      String asertType="$myAssertion.ID"
+                      //log.info "asertType"+asertType
+                      if(asertType.contains("GroovyScriptAssertion"))  
+                         {                                                                            
+                           //log.info "CHKECSC"+"$myAssertion.scriptText"
+                           amsg=""
+                         }
+                      else if(asertType.contains("ProXPathContainsAssertion")==false  && asertType.contains("SOAP") ==false)
+                         {
+                           //log.info "CHECK "+"$myAssertion.expectedContent"
+                           amsg="$myAssertion.expectedContent"
+                         }
+                      else
+                                                         {
+                            //log.info "Dont do"
+                         }
+                     }else  if (astatus.equals("PASS"))
+                    {
+                      ares='<font color="green">Passed</font>'
+                      String asertType="$myAssertion.ID"
+                      //log.info "asertType"+asertType
+                      if(asertType.contains("GroovyScriptAssertion"))  
+                         {                                                                            
+                           //log.info "CHKECSC"+"$myAssertion.scriptText"
+                           amsg=""
+                         }
+                      else if(asertType.contains("ProXPathContainsAssertion")==false  && asertType.contains("SOAP") ==false)
+                         {
+                           //log.info "CHECK "+"$myAssertion.expectedContent"
+                           amsg="$myAssertion.expectedContent"
+                         }
+                      else
+                                                                                    {
+                            //log.info "Dont do"
+                         }
+                     }
+                                                                else
+                                                                {
+                                                ares='<font color="red">Failed</font>'
+                                                                                                amsg="$myAssertion.errors"
+                                                                                                if(amsg.contains('expecting '))
+                                                                                                                amsg='Expecting'+amsg.split('expecting')[1]
+                                                                                amsg=amsg.replaceAll("actual was","Actual").replaceAll("]]","]");
+                                                                }
+                                                                HTML_Body+='<TR><TD width="7%">Assertion</TD><TD width="40%">'+aname+'</TD><TD align="center" width="10%">'+ares+'</TD><TD width="25%">'+amsg+'</TD></TR>'
+                }
+                HTML_Body+='</TABLE></div>'
+                HTML_Body+='<div id="target'+testCaseName+'_'+step+'ReqRes\" style=\"display:none\"><TABLE align=\"center\" ID=\"One\" class= \"class_name\" bgcolor=\"#AFEEEE\" border width =\"80%\"  cellspacing = 0 cellpadding = 2  style = \"border-left:solid 2px White;\"><TR><TD width = "40%" size="4" valign="top"><font color="blue" size="2"><b>REQUEST</b></font><br><br><pre>'+req.replaceAll("\n&amp;=","").replaceAll("<","&lt;").replaceAll(">","&gt;")+'</pre></TD><TD width = "40%" size="4" valign="top" ><font color="blue" size="2"><b>RESPONSE</b></font><br><br><pre>'+response.replaceAll("><",">\n<").replaceAll("<","&lt;").replaceAll(">","&gt;")+' </TD></TR></TABLE></div>'
+          }
+          else if(type=="datagen")
+                {
+                                step+=1;
+                                HTML_Body+='<TABLE align="center" ID="One" class= "class_name" bgcolor="#E5E4E2" border width ="80%"  cellspacing = 0 cellpadding = 2  style = "border-left:solid 2px White;"><TR><TD width = "5%" >Step '+step+'</TD><TD width = "40%"><a href="#" onClick="showDiv(\'target'+testCaseName+'_'+step+'\');return false;">'+StepName+'</a></td></tr></Table><div id="target'+testCaseName+'_'+step+'\" style=\"display:none\"><TABLE align="center" ID="One" class= "class_name" bgcolor="#FFFAF0" border width ="80%"  cellspacing = 0 cellpadding = 2  style = "border-left:solid 2px White;">'
+                                for (String p in it.getPropertyNames())
+
+                     {
+                                HTML_Body+='<TR><TD width="10%">Created Data</TD><TD width="35%">'+p+'</TD><TD align="center" width="35%">'+it.getPropertyValue(p)+'</TD></TR>'
+                     }
+                                HTML_Body+='</TABLE></div></Table>'
+                }
+          else if(type=="groovy")
+                {
+                                step+=1;
+                                HTML_Body+='<TABLE align="center" ID="One" class= "class_name" bgcolor="#E5E4E2" border width ="80%"  cellspacing = 0 cellpadding = 2  style = "border-left:solid 2px White;"><TR><TD width = "5%" >Step '+step+'</TD><TD width = "40%">'+StepName+'</td></tr></Table>'
+                }
+                }
+
+            
+                }catch(Exception e){}
+                HTML_Body+='</div>'
+                BODY.put(testCaseName,HTML_Body)
+                HTML_Body = '';
+             
+}
+
+for(TCs in TC)
+
+HTML_Body += BODY.get(TCs)
+
+TotalCases = OPass+OFail;
+
+String      HTMLTable = '<br><br><table width="35%" border="1" margin="10,5,5,50"  align="center"><tr width="100%" align="left"><th bgcolor="#fefefe" width="50%">Total API cases Executed</th><th bgcolor="#fefefe" width="50%">'+TotalCases+'</th></tr>'
+HTMLTable = HTMLTable + '<tr width="100%" align="left"><th bgcolor="#fefefe" width="50%">Total Cases Passed</th><th bgcolor="#fefefe" width="50%">'+OPass+'</th></tr>'
+HTMLTable = HTMLTable + '<tr width="100%" align="left"><th bgcolor="#fefefe" width="50%">Total Cases Failed</th><th bgcolor="#fefefe" width="50%">'+OFail+'</th></tr>'
+HTMLTable = HTMLTable + '<tr width="100%" align="left"><th bgcolor="#fefefe" width="50%">Environment</th><th bgcolor="#fefefe" width="50%">'+context.expand('${#TestSuite#Environment}')+'</th></tr>'
+HTMLTable = HTMLTable + '<tr width="100%" align="left"><th bgcolor="#fefefe" width="50%">Execution Time</th><th bgcolor="#fefefe" width="50%">'+ftt.format(new Date())+'</th></tr></table>'
+String HTML_Starting2='<title>'+testSuite.name+' Automation Report</title></head><script> function showDiv(objectID) { var theElementStyle = document.getElementById(objectID);  if(theElementStyle.style.display == "none")  { theElementStyle.style.display = "block";  } else { theElementStyle.style.display = "none"; }  }</script><body bgcolor="#FFFAFA"><h1 align="center">'+testSuite.name+' Automation Report</h1><div id="chart_div" style="float:left"></div>'+HTMLTable+'<table align="center" width="80%" class="Report"  bgcolor="#ADE6F1" border="1" margin="10,5,5,50"><tr><th width="80%">Test Execution Results</th></tr></table>'                 
+HTML_Final = HTML_Starting+'<script type="text/javascript">google.load(\'visualization\', \'1.0\', {\'packages\':[\'corechart\']});  google.setOnLoadCallback(drawChart);function drawChart() {var data = new google.visualization.DataTable(); data.addColumn(\'string\', \'Result\'); data.addColumn(\'number\', \'Count\');data.addRows([[\'PASS\', '+OPass+'],[\'FAIL\', '+OFail+'],]); var options = {\'title\':\'Overall Result\', \'width\':500, \'height\':300, \'backgroundColor\':\'fefefe\', \'colors\': [\'#009933\', \'#F00000\'], \'fontSize\': 15};var chart = new google.visualization.PieChart(document.getElementById(\'chart_div\'));chart.draw(data, options);}</script>'+HTML_Starting2+HTML_Body+HTML_Ending
+
+String Filename = testSuite.name+"_"+ft.format(new Date())+".html"
+File file = new File(ProjectPath+Filename);
+boolean blnDeleted = file.delete();
+FileWriter writer = new FileWriter(ProjectPath+Filename, true);
+writer.write(HTML_Final);
+writer.close();
+log.info 'Scenario Over']]></con:tearDownScript>
+  </con:testSuite>
+  <con:properties/>
+  <con:wssContainer/>
+  <con:oAuth2ProfileContainer/>
+  <con:oAuth1ProfileContainer/>
+  <con:sensitiveInformation/>
+</con:soapui-project>

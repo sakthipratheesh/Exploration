@@ -1,0 +1,51 @@
+Status: OK
+Time Taken: 582
+Size: 346
+Timestamp: Fri May 05 09:39:50 IST 2023
+TestStep: Multiply
+
+----------------- Messages ------------------------------
+
+----------------- Properties ------------------------------
+Endpoint: http://www.dneonline.com/calculator.asmx
+Encoding: UTF-8
+
+---------------- Request ---------------------------
+Request Headers: SOAPAction : "http://tempuri.org/Multiply"
+Connection : Keep-Alive
+User-Agent : Apache-HttpClient/4.5.5 (Java/16.0.1)
+Host : www.dneonline.com
+Accept-Encoding : gzip,deflate
+Content-Length : 301
+Content-Type : text/xml;charset=UTF-8
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:Multiply>
+         <tem:intA>5</tem:intA>
+         <tem:intB>5</tem:intB>
+      </tem:Multiply>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+---------------- Response --------------------------
+Response Headers: Cache-Control : private, max-age=0
+Server : Microsoft-IIS/10.0
+X-AspNet-Version : 2.0.50727
+Vary : Accept-Encoding
+#status# : HTTP/1.1 200 OK
+X-Powered-By-Plesk : PleskWin
+Date : Fri, 05 May 2023 04:09:49 GMT
+Content-Type : text/xml; charset=utf-8
+X-Powered-By : ASP.NET
+
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <soap:Body>
+      <MultiplyResponse xmlns="http://tempuri.org/">
+         <MultiplyResult>25</MultiplyResult>
+      </MultiplyResponse>
+   </soap:Body>
+</soap:Envelope>

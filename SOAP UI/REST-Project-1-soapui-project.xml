@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="0e1bc47e-4652-49b4-89a4-b3ed57b81ecd" activeEnvironment="Default" name="REST Project 1" resourceRoot="" soapui-version="5.7.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="3af94fb5-370f-4224-81a8-9cf65cb53fcb" wadlVersion="http://wadl.dev.java.net/2009/02" name="https://reqres.in" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>https://reqres.in</con:endpoint></con:endpoints><con:resource name="Users" path="/api/users" id="63c1e934-3264-401f-a44b-a555ace2e4a7"><con:settings/><con:parameters/><con:method name="Users 1" id="16cb8a14-94df-4c75-8999-f55912f52016" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>201</con:status><con:params/><con:element xmlns:user="https://reqres.in/api/users">user:Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="Request 1" id="d220058a-fe4f-4c11-9383-7296fd908649" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://reqres.in</con:endpoint><con:request>{
+    "name": "TestUser",
+    "job": "leader"
+}</con:request><con:originalUri>https://reqres.in/api/users</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="f207a3db-a5f9-476b-82bb-98183fad51a6" name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="dc98b7f5-5c72-41c4-aa19-5d9b505aec8c" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="Users 1 - Request 1" id="173a7630-1518-4d82-acc9-9da30eaa7fbe"><con:settings/><con:config service="https://reqres.in" resourcePath="/api/users" methodName="Users 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Users 1 - Request 1" id="d220058a-fe4f-4c11-9383-7296fd908649" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://reqres.in</con:endpoint><con:request>{ 
+    "Name": "${Properties#Name}", 
+    "Job": "${Properties#Job}", 
+    "Designation": "${Properties#Designation}", 
+    "Location": "${Properties#Location}" 
+}</con:request><con:originalUri>https://reqres.in/api/users</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script" id="9aa80f07-4925-4d63-a01a-a432846d3e3f"><con:settings/><con:config><script> import groovy.util.* 
+import groovy.json.JsonSlurper   def res 
+def groovyUtils =new com.eviware.soapui.support.GroovyUtils(context) 
+def projectDir=groovyUtils.projectPath   File file=new File(projectDir) 
+def fisrtLevelDir=file.getParent() 
+//log.info fisrtLevelDir 
+//consloe line will print for above statement as : D:\Self_Exploration  
+def filePath= fisrtLevelDir + "\\SoapUI\\TestData.csv"  
+//log.info filePath 
+//consloe line will print for above statement as :D:\Self_Exploration\SoapUI\TestData.csv   
+//To Read the values from excel sheet 
+context.fileReader =new BufferedReader(new FileReader(filePath)) 
+rows=context.fileReader.readLines()   //For fetching all the lines in excel sheet 
+int n=rows.size() 
+for (int i=1;i &lt;n;i++){ 
+    row=rows[i] 
+    String[] data=row.split(",")       //Set the Property value 
+    testRunner.testCase.getTestStepByName("Properties").setPropertyValue("Name",data[0]) 
+    testRunner.testCase.getTestStepByName("Properties").setPropertyValue("Job",data[1]) 
+    testRunner.testCase.getTestStepByName("Properties").setPropertyValue("Designation",data[2]) 
+    testRunner.testCase.getTestStepByName("Properties").setPropertyValue("Location",data[3])       //run the step 
+    testRunner.runTestStepByName("POST-Create Users")       //Store the Response values 
+    res=context.expand('${POST-Create Users#Response}') 
+    obj=new JsonSlurper().parseText(res) 
+    log.info obj       //assert the expected data vs actual excel sheet data 
+    assert obj.Name==data[0] 
+    assert obj.Job==data[1] 
+    assert obj.Designation==data[2] 
+    assert obj.Location==data[3] 
+}   3. Add the step as 'Post-Users Create Request' call 
+POST -  Link https://reqres.in/api/users 
+</script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite id="0805b5ee-18a2-4781-806e-09c93ab0290d" name="Groovy Script"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="1a817c0e-bc95-415a-9670-89eaafe90200" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="properties" name="Properties" id="efc00e11-b710-45bd-b2c7-84b3b5d9fc16"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>Name</con:name><con:value>Test</con:value></con:property><con:property><con:name>Job</con:name><con:value>Test</con:value></con:property><con:property><con:name>Designation</con:name><con:value>Sr</con:value></con:property><con:property><con:name>Location</con:name><con:value>Chennai</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script" id="eaeb975c-d33b-4cae-9052-20c18333e163"><con:settings/><con:config><script> import groovy.util.* 
+import groovy.json.JsonSlurper   
+def res 
+def groovyUtils =new com.eviware.soapui.support.GroovyUtils(context) 
+def projectDir=groovyUtils.projectPath   
+File file=new File(projectDir) 
+def fisrtLevelDir=file.getParent() 
+//log.info fisrtLevelDir 
+//consloe line will print for above statement as : D:\Self_Exploration  
+def filePath= fisrtLevelDir + "\\SOAP UI\\TestData.csv"  
+//log.info filePath 
+//consloe line will print for above statement as :D:\Self_Exploration\SoapUI\TestData.csv   
+//To Read the values from excel sheet 
+context.fileReader =new BufferedReader(new FileReader(filePath)) 
+rows=context.fileReader.readLines()   //For fetching all the lines in excel sheet 
+int n=rows.size() 
+for (int i=1;i &lt;n;i++){ 
+    row=rows[i] 
+    String[] data=row.split(",")       //Set the Property value 
+    testRunner.testCase.getTestStepByName("Properties").setPropertyValue("Name",data[0]) 
+    testRunner.testCase.getTestStepByName("Properties").setPropertyValue("Job",data[1]) 
+    testRunner.testCase.getTestStepByName("Properties").setPropertyValue("Designation",data[2]) 
+    testRunner.testCase.getTestStepByName("Properties").setPropertyValue("Location",data[3])       //run the step 
+    testRunner.runTestStepByName("POST-Create Users")       //Store the Response values 
+    res=context.expand('${POST-Create Users#Response}') 
+    obj=new JsonSlurper().parseText(res) 
+    log.info obj       //assert the expected data vs actual excel sheet data 
+    assert obj.Name==data[1] 
+    assert obj.Job==data[2] 
+    assert obj.Designation==data[3] 
+    assert obj.Location==data[4] 
+}
+</script></con:config></con:testStep><con:testStep type="restrequest" name="POST-Create Users" id="76dcfd80-30f5-414b-af6c-e5e0bc1b675b"><con:settings/><con:config service="https://reqres.in" resourcePath="/api/users" methodName="Users 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Users 1 - Request 1" id="d220058a-fe4f-4c11-9383-7296fd908649" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://reqres.in</con:endpoint><con:request>{
+    "name": "${=org.apache.commons.lang.RandomStringUtils.randomAlphabetic(2)}",
+    "job": "${=org.apache.commons.lang.RandomStringUtils.randomAlphabetic(5)}",
+    "date": "${= def now = new Date();now.format("YYYY-MM-dd")}"
+}</con:request><con:originalUri>https://reqres.in/api/users</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>Name</con:name><con:value/></con:property><con:property><con:name>Job</con:name><con:value/></con:property><con:property><con:name>Designation</con:name><con:value/></con:property><con:property><con:name>Location</con:name><con:value/></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

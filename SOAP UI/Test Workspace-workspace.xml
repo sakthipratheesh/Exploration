@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-workspace name="Test Workspace" soapui-version="5.7.0" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  <con:project name="01_Calculator_Demo_SOAP Project">D:/MyWorkspace/SOAP UI/01_Calculator_Demo_SOAP Project-soapui-project.xml</con:project>
+  <con:project name="CountryInfoService">D:/MyWorkspace/SOAP UI/CountryInfoService-soapui-project.xml</con:project>
+  <con:project name="GraphQL Demo Project">D:/MyWorkspace/SOAP UI/GraphQL Demo Project-soapui-project.xml</con:project>
+  <con:project name="REST Project -01.POST Request">D:/MyWorkspace/SOAP UI/REST Project -01.POST Request-soapui-project.xml</con:project>
+  <con:project name="Sample Authentication Project">D:/MyWorkspace/SOAP UI/Sample Authentication Project-soapui-project.xml</con:project>
+  <con:collectInfoForSupport>false</con:collectInfoForSupport>
+</con:soapui-workspace>

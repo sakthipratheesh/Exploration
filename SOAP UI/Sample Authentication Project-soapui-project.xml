@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="Sample Authentication Project" resourceRoot="${projectDir}" soapui-version="5.7.0" abortOnError="false" runType="SEQUENTIAL" id="02214546-210a-43b6-a376-d2dbba708f4c" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  <con:interface xsi:type="con:RestService" wadlVersion="http://wadl.dev.java.net/2009/02" name="OAuth2 - Desktop client" type="rest" basePath="" id="04ab67dc-b39a-4c74-a15f-fe9de8387fb3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <con:description>https://www.googleapis.com</con:description>
+    <con:settings/>
+    <con:definitionCache/>
+    <con:endpoints>
+      <con:endpoint>https://www.googleapis.com</con:endpoint>
+    </con:endpoints>
+    <con:resource name="Lists" path="/tasks/v1/users/@me/lists" id="0719c6e7-ecef-4544-a9c1-7e80ca66f3dc">
+      <con:settings/>
+      <con:parameters/>
+      <con:method name="Lists" method="GET" id="d8438d09-dea9-4a1b-afeb-bc6e44c4d403">
+        <con:settings/>
+        <con:parameters/>
+        <con:representation type="RESPONSE">
+          <con:mediaType>application/json; charset=UTF-8</con:mediaType>
+          <con:status>200</con:status>
+          <con:params/>
+          <con:element xmlns:lis="https://www.googleapis.com/tasks/v1/users/@me/lists">lis:Response</con:element>
+        </con:representation>
+        <con:representation type="FAULT">
+          <con:mediaType>application/json; charset=UTF-8</con:mediaType>
+          <con:status>401</con:status>
+          <con:params/>
+          <con:element xmlns:lis="https://www.googleapis.com/tasks/v1/users/@me/lists">lis:Fault</con:element>
+        </con:representation>
+        <con:request name="View Task List" mediaType="application/json" id="badd4887-1e28-4a9b-ab32-afe87ebf5eea">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>https://www.googleapis.com</con:endpoint>
+          <con:request/>
+          <con:originalUri>https://www.googleapis.com/tasks/v1/users/@me/lists</con:originalUri>
+          <con:credentials>
+            <con:selectedAuthProfile>Google Account - desktop client</con:selectedAuthProfile>
+            <con:authType>OAuth 2.0</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:request>
+      </con:method>
+    </con:resource>
+  </con:interface>
+  <con:interface xsi:type="con:RestService" wadlVersion="http://wadl.dev.java.net/2009/02" name="OAuth2 - Browser client" type="rest" id="483d1d4f-7b43-48b6-ad73-3b6a8d8c719b" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <con:description>https://www.googleapis.com</con:description>
+    <con:settings/>
+    <con:definitionCache type="TEXT" rootPart=""/>
+    <con:endpoints>
+      <con:endpoint>https://www.googleapis.com</con:endpoint>
+    </con:endpoints>
+    <con:resource name="Lists" path="/tasks/v1/users/@me/lists" id="8e2a9a48-eb3b-4689-a2cc-5289bff4391b">
+      <con:settings/>
+      <con:parameters/>
+      <con:method name="Lists" method="GET" id="c0d052bd-bbba-477f-9e9e-718d220c4047">
+        <con:settings/>
+        <con:parameters/>
+        <con:representation type="FAULT">
+          <con:mediaType>application/json; charset=UTF-8</con:mediaType>
+          <con:status>401</con:status>
+          <con:params/>
+          <con:element xmlns:lis="https://www.googleapis.com/tasks/v1/users/@me/lists">lis:Fault</con:element>
+        </con:representation>
+        <con:representation type="RESPONSE">
+          <con:mediaType>application/json; charset=UTF-8</con:mediaType>
+          <con:status>200</con:status>
+          <con:params/>
+          <con:element xmlns:lis="https://www.googleapis.com/tasks/v1/users/@me/lists">lis:Response</con:element>
+        </con:representation>
+        <con:request name="View Task List" mediaType="application/json" id="fad06cfc-f4f0-4c7e-95ed-60ec573497a7">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:encoding/>
+          <con:endpoint>https://www.googleapis.com</con:endpoint>
+          <con:request/>
+          <con:originalUri>https://www.googleapis.com/tasks/v1/users/@me/lists</con:originalUri>
+          <con:credentials>
+            <con:selectedAuthProfile>Google Account - Browser client</con:selectedAuthProfile>
+            <con:authType>OAuth 2.0</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:request>
+      </con:method>
+    </con:resource>
+  </con:interface>
+  <con:interface xsi:type="con:RestService" wadlVersion="http://wadl.dev.java.net/2009/02" name="Basic Auth" type="rest" id="bd0c071b-8d81-4274-bba1-4595671163e2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <con:settings/>
+    <con:definitionCache type="TEXT" rootPart=""/>
+    <con:endpoints>
+      <con:endpoint>http://browserspy.dk</con:endpoint>
+    </con:endpoints>
+    <con:resource name="Password-ok.php" path="/password-ok.php" id="5904b2ae-bb43-42e2-b232-a3af380136fd">
+      <con:settings/>
+      <con:parameters/>
+      <con:method name="Password-ok.php" method="GET" id="f59365c1-03a7-4742-b5e4-180d46d46c4c">
+        <con:settings/>
+        <con:parameters/>
+        <con:representation type="FAULT">
+          <con:mediaType>text/html</con:mediaType>
+          <con:status>401</con:status>
+          <con:params/>
+          <con:element>html</con:element>
+        </con:representation>
+        <con:representation type="RESPONSE">
+          <con:mediaType>text/html</con:mediaType>
+          <con:status>200</con:status>
+          <con:params/>
+          <con:element>html</con:element>
+        </con:representation>
+        <con:representation type="RESPONSE">
+          <con:mediaType>text/html; charset=UTF-8</con:mediaType>
+          <con:status>200</con:status>
+          <con:params/>
+          <con:element xmlns:xht="http://www.w3.org/1999/xhtml">xht:html</con:element>
+        </con:representation>
+        <con:request name="Login" mediaType="application/json" id="bca00d84-2528-489c-97d2-0bba947c371b">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>http://browserspy.dk</con:endpoint>
+          <con:request/>
+          <con:originalUri>http://browserspy.dk/password-ok.php</con:originalUri>
+          <con:credentials>
+            <con:username>test</con:username>
+            <con:password>test</con:password>
+            <con:domain/>
+            <con:selectedAuthProfile>Basic</con:selectedAuthProfile>
+            <con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes>
+            <con:preemptive>true</con:preemptive>
+            <con:authType>Preemptive</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:request>
+      </con:method>
+    </con:resource>
+  </con:interface>
+  <con:properties/>
+  <con:wssContainer/>
+  <con:databaseConnectionContainer/>
+  <con:oAuth2ProfileContainer>
+    <con:oAuth2Profile>
+      <con:name>Google Account - desktop client</con:name>
+      <con:clientID>669184148999-uvb9iqhnaq6h0gju1qhdraf5ds0asaeo.apps.googleusercontent.com</con:clientID>
+      <con:clientSecret>vRl0LylcL1eg4baB7Hcpw5I5</con:clientSecret>
+      <con:authorizationURI>https://accounts.google.com/o/oauth2/auth</con:authorizationURI>
+      <con:accessTokenURI>https://accounts.google.com/o/oauth2/token</con:accessTokenURI>
+      <con:redirectURI>urn:ietf:wg:oauth:2.0:oob</con:redirectURI>
+      <con:accessToken/>
+      <con:accessTokenPosition>HEADER</con:accessTokenPosition>
+      <con:oAuth2Flow>AUTHORIZATION_CODE_GRANT</con:oAuth2Flow>
+      <con:refreshAccessTokenMethod>AUTOMATIC</con:refreshAccessTokenMethod>
+      <con:refreshToken>1/jd8X35NAzELGVTVr4pMI41gTbNtP3LEIY9TGNCI6flw</con:refreshToken>
+      <con:scope>https://www.googleapis.com/auth/tasks.readonly</con:scope>
+      <con:accessTokenStatus xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+      <con:accessTokenExpirationTime>3600</con:accessTokenExpirationTime>
+      <con:accessTokenIssuedTime>1395760374</con:accessTokenIssuedTime>
+    </con:oAuth2Profile>
+    <con:oAuth2Profile>
+      <con:name>Google Account - Browser client</con:name>
+      <con:clientID>669184148999-ucq8m5akbcin8ni253girkijr9vgniii.apps.googleusercontent.com</con:clientID>
+      <con:clientSecret/>
+      <con:authorizationURI>https://accounts.google.com/o/oauth2/auth</con:authorizationURI>
+      <con:accessTokenURI>https://accounts.google.com/o/oauth2/token</con:accessTokenURI>
+      <con:redirectURI>https://www.example.com/oauth2callback</con:redirectURI>
+      <con:accessToken/>
+      <con:accessTokenPosition>HEADER</con:accessTokenPosition>
+      <con:oAuth2Flow>IMPLICIT_GRANT</con:oAuth2Flow>
+      <con:refreshAccessTokenMethod>AUTOMATIC</con:refreshAccessTokenMethod>
+      <con:scope>https://www.googleapis.com/auth/tasks.readonly</con:scope>
+      <con:accessTokenStatus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">UNKNOWN</con:accessTokenStatus>
+      <con:accessTokenIssuedTime>1395761967</con:accessTokenIssuedTime>
+    </con:oAuth2Profile>
+  </con:oAuth2ProfileContainer>
+  <con:oAuth1ProfileContainer/>
+  <con:reporting>
+    <con:xmlTemplates/>
+    <con:parameters/>
+  </con:reporting>
+  <con:sensitiveInformation/>
+</con:soapui-project>

@@ -1,0 +1,26 @@
+Status: FAILED
+Time Taken: 48499
+Size: 0
+Timestamp: Thu May 04 11:47:02 IST 2023
+TestStep: Add
+
+----------------- Messages ------------------------------
+java.net.SocketException: Connection reset
+
+----------------- Properties ------------------------------
+Endpoint: http://www.dneonline.com/calculator.asmx
+Encoding: UTF-8
+
+---------------- Request ---------------------------
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:Add>
+         <tem:intA>15</tem:intA>
+         <tem:intB>13</tem:intB>
+      </tem:Add>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+---------------- Response --------------------------
+- missing response / garbage collected -

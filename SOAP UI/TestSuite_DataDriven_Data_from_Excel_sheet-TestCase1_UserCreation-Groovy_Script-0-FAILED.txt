@@ -1,0 +1,10 @@
+Status: FAILED
+Time Taken: 149
+Size: 0
+Timestamp: Fri May 05 09:48:37 IST 2023
+TestStep: Groovy Script
+Error:java.io.FileNotFoundException: D:\MyWorkspace\SoapUI\TestData.csv (The system cannot find the path specified)
+
+----------------- Messages ------------------------------
+java.io.FileNotFoundException: D:\MyWorkspace\SoapUI\TestData.csv (The system cannot find the path specified)
+error at line: 17
